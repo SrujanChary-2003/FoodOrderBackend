@@ -5,6 +5,7 @@ import mongoose from "mongoose";
 import myUserRoute from "./routes/MyUserRoutes";
 import {v2 as cloudinary} from 'cloudinary';
 import myRestaurantRoute from "./routes/MyRestaurantRoute";
+import restaurantRoute from "./routes/RestaurantRoute"
 mongoose
     .connect(process.env.MONGODB_CONNECTION_STRING as string)
     .then(()=> console.log("coonected successfully to db"));
@@ -30,7 +31,7 @@ app.get("/health", async (req: Request, res: Response)=> {
 // whenever listen to /api/my/user the below run is going to run
 app.use("/api/my/user", myUserRoute);
 app.use("/api/my/restaurant", myRestaurantRoute)
-
+app.use("/api/restaurant", restaurantRoute)
 app.listen(5000, ()=> {
     console.log("server started on localhost:5000")
 })

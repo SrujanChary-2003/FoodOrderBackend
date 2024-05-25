@@ -38,7 +38,7 @@ const createMyRestaurant = async (req: Request, res: Response) => {
         const restaurant = new Restaurant(req.body);
         restaurant.imageUrl = imageUrl;
         restaurant.user = new mongoose.Types.ObjectId(req.userId);
-        restaurant.lastUpdated = new Date().toISOString();
+        restaurant.lastUpdated = new Date();
         await restaurant.save();
 
         res.status(201).send(restaurant);
@@ -66,7 +66,7 @@ const updateMyRestaurant = async (req: Request, res: Response) => {
         restaurant.estimatedDeliveryTime = req.body.estimatedDeliveryTime;
         restaurant.cuisines = req.body.cuisines;
         restaurant.menuItems = req.body.menuItems;
-        restaurant.lastUpdated = new Date().toISOString();
+        restaurant.lastUpdated = new Date();
 
         if(req.file) {
             const imageUrl = await uploadImage(req.file as Express.Multer.File)
